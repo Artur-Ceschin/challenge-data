@@ -1,5 +1,43 @@
 {% extends 'layout.njk' %}
 
 {% block content %}
-    Teste
+    <div class="card">
+        <section class="image"></section>
+        <section class="data">
+            <h3>Info</h3>
+            <div class="item">
+                <div>Nome Completo</div>
+                <div>Artur Ceschin</div>
+            </div>
+
+            <div class="item">
+                <div>Idade</div>
+                <div>33</div>
+            </div>
+
+            <div class="item">
+                <div>Grau de escolaridade</div>
+                <div>Mestrado</div>
+            </div>
+
+            <div class="item">
+                <div>Tipo de Aula</div>
+                <select name="" id="">
+                    <option value="">Online</option>
+                    <option value="">Presencial</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div>Acompanhamento</div>
+                <span>Matemática</span>
+                <span>Física</span>
+            </div>
+
+            <div class="item">
+                <div>Desde</div>
+                <div>11/12/2005</div>
+            </div>
+        </section>
+    </div>
 {% endblock content %}
