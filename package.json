@@ -1,0 +1,21 @@
+{
+  "name": "challenge-fase-03",
+  "version": "1.0.0",
+  "description": "Challenges gave through phase 3 of the course Launchbase",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artur-Ceschin/challenge-fase-03.git"
+  },
+  "homepage": "https://github.com/Artur-Ceschin/challenge-fase-03#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nunjucks": "^3.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
