@@ -1,53 +1,56 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-:root{
+:root {
     --olive: #A1C181;
     --platinum: #EAE6E5;
-    --smoky-black:#12130F;
-    --blue:#7293A0;
-    --gray:#87919E;
-    --corn:#F2E86D;
+    --smoky-black: #12130F;
+    --blue: #7293A0;
+    --gray: #87919E;
+    --corn: #F2E86D;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--olive) ;
+    background-color: var(--olive);
 }
-header{
+
+header {
     width: 100%;
     background-color: var(--platinum);
     padding: 2rem;
 }
-.links{
+
+.links {
     text-align: center;
 }
-.links a{
-    text-decoration:none;
+
+.links a {
+    text-decoration: none;
     color: var(--smoky-black);
     font-size: 26px;
     position: relative;
 }
 
-.links a.active{
+.links a.active {
     font-weight: bold;
     color: var(--blue);
 }
 
-.links a + a {
+.links a+a {
     margin-left: 2rem;
 }
 
-.links a:hover{
+.links a:hover {
     color: var(--blue);
 }
 
-.links a::after{
+.links a::after {
     content: '';
     width: 0;
     height: 2px;
@@ -55,19 +58,19 @@ header{
     bottom: -4px;
     background-color: var(--blue);
     position: absolute;
-}   
+}
 
-.links a:hover::after{
+.links a:hover::after {
     width: 100%;
-    transition: width 300ms ease-in-out ;
+    transition: width 300ms ease-in-out;
 }
 
 /* CARD */
 
-.card{
+.card {
+    background-color: var(--platinum);
     width: 700px;
     min-height: 500px;
-    background-color: var(--platinum);
     margin: 32px auto;
 
     /* SHADOW */
@@ -80,68 +83,129 @@ header{
     /* ANIMATION */
     animation-name: go;
     animation-duration: 200ms;
+
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
 }
-.card:hover{
-    transform: translateY(-20px);
+
+.card:hover {
     transition-duration: 200ms;
 }
+
 @keyframes go {
     from {
         opacity: 0;
         transform: translateY(15px);
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
 
-.card .image{
+/* .card .image {
     background: url("https://source.unsplash.com/collection/3798383") center center no-repeat;
     background-size: cover;
-}
+} */
 
 /* DATA */
 
-.data {
-    padding: 32px;
+.details{
+    padding: 2rem;
 }
-
-.data .item{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding:16px 0;
+.details .item{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 0;
 }
-.data .item:last-child{
+.details .item:last-child{
     border: none;
 }
-
-.data h3,
-.data .item div:nth-child(1){
+.details h3,
+.details .item div:nth-child(1) {
     font-size: 14px;
     line-height: 24px;
-    color: var(--gray);
-    letter-spacing: 1px;
+    color: #777;
+    letter-spacing: 0.7px;
     font-weight: normal;
 }
+.details .item div:nth-child(2) {
+    color: #555;
+    font-weight:bold;
+    font-size: 18px;
+}
+.details h3{
+    text-transform:uppercase;
+    font-weight:bold;
+    color: var(--main-color);
+}
 
-.data .item div:nth-child(2){
+.details .item div:nth-child(2) span {
+    padding: 8px 16px;
+    background-color: var(--corn);
+    border-radius:18px;
+    color: #777;
+    margin-right: 8px;
+    margin-top: 8px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+/* CREATE */
+select,
+input {
+    width: 100%;
+    outline: none;
     color: #555;
     font-weight: bold;
     font-size: 18px;
+    border: 0;
+    background-color: var(--platinum);
 }
 
-.data h3{
-    text-transform: uppercase;
-    font-weight:bold;
-    color: var(--olive);
-}
-
-.data .item span{
-    padding: 12px 12px;
-    background-color: var(--corn);
-    font-size: 16px;
-    margin-top: 8px;
+input[type="radio"] {
+    width: initial;
     margin-right: 8px;
-    display: inline-block;
-    border-radius: 16px;
-    color: var(--smoky-black);
 }
+
+input::placeholder {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+select option {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+
+button[type="submit"],
+a.button {
+    width: 100%;
+    background-color: #829FD9;
+    margin-top: 16px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid white;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+
+}
+
+
+button:hover {
+    box-shadow: 1px 1px 10px rgb(110, 110, 110);
+}
+
+
+a.button{
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.form-delete button[type="submit"]{
+    background-color: lightcoral;
+}
+

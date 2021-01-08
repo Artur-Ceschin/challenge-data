@@ -2,43 +2,49 @@
 
 {% block content %}
     <div class="card">
-        <section class="image"></section>
+        <section class="image" style="background:url( {{teacher.avatar_url }}) no-repeat center center / cover"></section>
         <section class="details">
             <h3>Info</h3>
             <div class="item">
                 <div>Nome Completo</div>
-                <div>Artur Ceschin</div>
+                <div>{{ teacher.name }}</div>
             </div>
 
             <div class="item">
                 <div>Idade</div>
-                <div>33</div>
+                <div>{{ teacher.age }}</div>
             </div>
 
             <div class="item">
                 <div>Grau de escolaridade</div>
-                <div>Mestrado</div>
+                <div>{{ teacher.education_level }}</div>
             </div>
 
             <div class="item">
                 <div>Tipo de Aula</div>
                 <div>
-                    Online
+                    <span>
+                        {{"Presencial" if teacher.class_type == 'face_to_face'  else "Online"  }}
+                    </span>
                 </div>
             </div>
 
             <div class="item">
                 <div>Acompanhamento</div>
                 <div>
-                    <span>Matemática</span>
-                    <span>Física</span>
+                    {% for service in teacher.services %}
+                        <span>{{service }}</span>
+                    {% endfor %}
+                    
                 </div>
             </div>
 
             <div class="item">
                 <div>Desde</div>
-                <div>11/12/2005</div>
+                <div>{{ teacher.created_at }}</div>
             </div>
+
+            <a href="/teachers/{{ teacher.id }}/edit" class="button">Editar</a>
         </section>
     </div>
 {% endblock content %}

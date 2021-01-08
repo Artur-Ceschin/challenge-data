@@ -1,0 +1,54 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "avatar_url": "https://decahtlon",
+      "name": "Artur Peres Ceschin",
+      "birth": 254275200000,
+      "education_level": "ES",
+      "class_type": "online",
+      "atuation": "Biologia",
+      "created_at": 1610033468048
+    },
+    {
+      "id": 2,
+      "avatar_url": "http://google.com",
+      "name": "Maria",
+      "birth": 587088000000,
+      "education_level": "M",
+      "class_type": "online",
+      "atuation": "Matemática, História",
+      "created_at": 1610038788175
+    },
+    {
+      "id": 4,
+      "avatar_url": "https://source.unsplash.com/collection/1652732",
+      "name": "Alberto",
+      "birth": 767664000000,
+      "education_level": "D",
+      "class_type": "face_to_face",
+      "atuation": "História, Geografia",
+      "created_at": 1610126609612
+    },
+    {
+      "id": "5",
+      "avatar_url": "https://source.unsplash.com/collection/3798383",
+      "name": "Alfredo",
+      "birth": -59875200000,
+      "education_level": "D",
+      "class_type": "online",
+      "atuation": "Matemática, Física",
+      "created_at": 1610126661638
+    },
+    {
+      "id": "6",
+      "avatar_url": "https://source.unsplash.com/collection/3798383",
+      "name": "Carlinhos Brown",
+      "birth": 1294531200000,
+      "education_level": "M",
+      "class_type": "online",
+      "atuation": "Química, Física, Matemãtica",
+      "created_at": 1610126791533
+    }
+  ]
+}
