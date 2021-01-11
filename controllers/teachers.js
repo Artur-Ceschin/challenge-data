@@ -1,6 +1,25 @@
 const fs = require('fs');
-const data = require('./data.json');
-const { age, date, education } = require('./utils')
+const data = require('../data.json');
+const { age, date, education } = require('../utils')
+
+exports.index = function (req, res) {
+
+    let teachers = data.teachers.map(function(teacher){
+        const newTeacher = {
+            ...teacher,
+            atuation: teacher.atuation.split(",")
+        }
+        return newTeacher;
+    });
+
+
+    return res.render('teachers/index', {teachers})
+}
+
+//CREATE   
+exports.create = function(req, res){
+    return res.render('teachers/create')
+}
 
 //SHOW
 exports.show = function (req, res) {
@@ -28,7 +47,7 @@ exports.show = function (req, res) {
     return res.render('teachers/show', { teacher })
 }
 
-//CREATE
+//POST
 exports.post = function (req, res) {
 
     const keys = Object.keys(req.body);
@@ -114,7 +133,8 @@ exports.put = function (req, res){
     const teacher = {
         ...foundTeacher,
         ...req.body,
-        birth: Date.parse(req.body.birth)
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id),
     }
 
 
