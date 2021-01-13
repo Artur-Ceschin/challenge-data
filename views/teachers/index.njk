@@ -18,18 +18,19 @@
                         <td>
                             <span style="background-image: url({{ teacher.avatar_url }})"></span>
                             {{ teacher.name }}</td>
-                        <td>
-                            {% for atuatio in teacher.atuation %}
-                                <span>{{ atuatio }}</span>
-                            {% endfor %}
-                        </td>
+                    </td>
+                    <td>
+                        {% for service in teacher.services %}
+                            <span>{{ service }}</span>
+                        {% endfor %}
+                    </td>
 
-                        <td>
-                            <a href="teachers/{{teacher.id}}">ver</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                    <td>
+                        <a href="teachers/{{teacher.id}}">ver</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}

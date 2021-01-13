@@ -7,7 +7,7 @@ exports.index = function (req, res) {
     let teachers = data.teachers.map(function(teacher){
         const newTeacher = {
             ...teacher,
-            atuation: teacher.atuation.split(",")
+            services: teacher.atuation.split(",")
         }
         return newTeacher;
     });
@@ -58,28 +58,22 @@ exports.post = function (req, res) {
         }
     }
 
-    let {
-        avatar_url,
-        name,
-        birth,
-        education_level,
-        class_type,
-        atuation
-    } = req.body
-
     birth = Date.parse(req.body.birth)
     created_at = Date.now()
-    id = Number(data.teachers.length + 1)
+
+    let id = 1
+
+    const lastTeacher = data.teachers[data.teachers.length - 1]
+
+    if (lastTeacher) {
+        id = lastTeacher.id + 1
+    }
 
     data.teachers.push({
         id,
-        avatar_url,
-        name,
-        birth,
-        education_level,
-        class_type,
-        atuation,
-        created_at,
+        ...req.body,
+        birth
+     
     });
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2), function (error) {
@@ -107,7 +101,7 @@ exports.edit = function(req, res) {
 
     const teacher = {
         ...foundTeacher,
-        birth: date(foundTeacher.birth),
+        birth: date(foundTeacher.birth).iso
     }
 
 

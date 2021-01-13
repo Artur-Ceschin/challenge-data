@@ -1,19 +1,21 @@
 const fs = require('fs');
 const data = require('../data.json');
-const { age, date, education } = require('../utils')
+const {date, school_year } = require('../utils')
 
 exports.index = function (req, res) {
 
+
     let students = data.students.map(function(student){
-        const newTeacher = {
+        const newStudent = {
             ...student,
-            atuation: student.atuation.split(",")
+            schools: school_year(student.school_year)
         }
-        return newTeacher;
+        return newStudent;
     });
 
 
     return res.render('students/index', {students})
+
 }
 
 //CREATE
@@ -21,33 +23,7 @@ exports.create =  function(req, res){
     return res.render('students/create')
 }
 
-//SHOW
-exports.show = function (req, res) {
-
-    const {
-        index
-    } = req.params
-
-    const foundTeacher = data.students.find(function (student) {
-        return student.id == index
-    })
-
-    if (!foundTeacher) {
-        return res.send("Teacher not found")
-    }
-
-    const student = {
-        ...foundTeacher,
-        age: age(foundTeacher.birth),
-        services: foundTeacher.atuation.split(","),
-        education_level: education(foundTeacher.education_level),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundTeacher.created_at),
-    }
-
-    return res.render('students/show', { student })
-}
-
-//CREATE
+//POST
 exports.post = function (req, res) {
 
     const keys = Object.keys(req.body);
@@ -58,29 +34,25 @@ exports.post = function (req, res) {
         }
     }
 
-    let {
-        avatar_url,
-        name,
-        birth,
-        education_level,
-        class_type,
-        atuation
-    } = req.body
 
     birth = Date.parse(req.body.birth)
-    created_at = Date.now()
-    id = Number(data.students.length + 1)
+    
+    let id = 1
+
+    const Laststudent = data.students[data.students.length - 1]
+
+    if (Laststudent) {
+        id = Laststudent.id + 1
+    }
+
 
     data.students.push({
         id,
-        avatar_url,
-        name,
+        ...req.body,
         birth,
-        education_level,
-        class_type,
-        atuation,
-        created_at,
-    });
+    })
+
+
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2), function (error) {
         if (error) {
@@ -91,23 +63,49 @@ exports.post = function (req, res) {
     })
 }
 
+//SHOW
+exports.show = function (req, res) {
+
+    const {
+        index
+    } = req.params
+
+    const foundStudent = data.students.find(function (student) {
+        return student.id == index
+    })
+
+    if (!foundStudent) {
+        return res.send("Student not found")
+    }
+
+    const student = {
+        ...foundStudent,
+        school_year: school_year(foundStudent.school_year),
+        birth: date(foundStudent.birth).birthDay
+    }
+
+    return res.render('students/show', { student })
+}
+
+
+
 //EDIT
 
 exports.edit = function(req, res) {
 
     const { index} = req.params
 
-    const foundTeacher = data.students.find(function (student) {
+    const foundStudent = data.students.find(function (student) {
         return student.id == index
     })
 
-    if (!foundTeacher) {
-        return res.send("Teacher not found")
+    if (!foundStudent) {
+        return res.send("Student not found")
     }
 
     const student = {
-        ...foundTeacher,
-        birth: date(foundTeacher.birth),
+        ...foundStudent,
+        birth: date(foundStudent.birth).iso
     }
 
 
@@ -121,17 +119,17 @@ exports.put = function (req, res){
 
     let index = 0
 
-    const foundTeacher = data.students.find(function(student, foundIndex){
+    const foundStudent = data.students.find(function(student, foundIndex){
         
        if (id == student.id) {
            index = foundIndex 
            return true
        }
     })
-    if (!foundTeacher) return res.send("Instructor not found")
+    if (!foundStudent) return res.send("Student not found")
 
     const student = {
-        ...foundTeacher,
+        ...foundStudent,
         ...req.body,
         birth: Date.parse(req.body.birth),
         id: Number(req.body.id),
@@ -155,12 +153,12 @@ exports.put = function (req, res){
 exports.delete = function(req, res){
     const { id } = req.body
 
-    const filteredTeachers = data.students.filter(function(student){
+    const filteredStudents = data.students.filter(function(student){
 
         return student.id != id
     }) 
 
-    data.students = filteredTeachers
+    data.students = filteredStudents
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
         if(err) {

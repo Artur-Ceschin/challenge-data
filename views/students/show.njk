@@ -2,49 +2,35 @@
 
 {% block content %}
     <div class="card">
-        <section class="image" style="background:url( {{teacher.avatar_url }}) no-repeat center center / cover"></section>
+        <section class="image" style="background:url( {{student.avatar_url }}) no-repeat center center / cover"></section>
         <section class="details">
             <h3>Info</h3>
             <div class="item">
                 <div>Nome Completo</div>
-                <div>{{ teacher.name }}</div>
+                <div>{{ student.name }}</div>
             </div>
 
             <div class="item">
-                <div>Idade</div>
-                <div>{{ teacher.age }}</div>
+                <div>Data de Nascimento</div>
+                <div>{{ student.birth }}</div>
+            </div>
+
+            <div class="item">
+                <div>Email</div>
+                <div>{{ student.email }}</div>
             </div>
 
             <div class="item">
                 <div>Grau de escolaridade</div>
-                <div>{{ teacher.education_level }}</div>
+                <div>{{ student.school_year }}</div>
             </div>
 
             <div class="item">
-                <div>Tipo de Aula</div>
-                <div>
-                    <span>
-                        {{"Presencial" if teacher.class_type == 'face_to_face'  else "Online"  }}
-                    </span>
-                </div>
+                <div>Horas Semanais</div>
+                <div>{{ student.hours }} horas</div>
             </div>
 
-            <div class="item">
-                <div>Acompanhamento</div>
-                <div>
-                    {% for service in teacher.services %}
-                        <span>{{service }}</span>
-                    {% endfor %}
-                    
-                </div>
-            </div>
-
-            <div class="item">
-                <div>Desde</div>
-                <div>{{ teacher.created_at }}</div>
-            </div>
-
-            <a href="/teachers/{{ teacher.id }}/edit" class="button">Editar</a>
+            <a href="/students/{{ student.id }}/edit" class="button">Editar</a>
         </section>
     </div>
 {% endblock content %}
