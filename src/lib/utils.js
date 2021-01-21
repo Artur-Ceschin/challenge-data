@@ -1,5 +1,5 @@
 module.exports = {
-    age: function age(timestamp) {
+    age(timestamp) {
 
         const today = new Date();
         const birth = new Date(timestamp)
@@ -17,7 +17,7 @@ module.exports = {
         return age
     },
 
-    date: function date(timestamp) {
+    date(timestamp) {
 
         const date = new Date(timestamp)
 
@@ -31,11 +31,13 @@ module.exports = {
              month,
              year,
             iso: `${year}-${month}-${day}`,
-            birthDay:`${month}/${year}`
+            birthDay:`${day}/${month}`,
+            format:`${day}/${month}/${year}`
          }
 
 
     },
+
 
     education: function education_schooling(school) {
 
@@ -59,7 +61,7 @@ module.exports = {
                 break;
         }
     },
-    school_year: function school_year(school_time) {
+    school_year(school_time) {
 
         switch (school_time) {
             case "5EF":
