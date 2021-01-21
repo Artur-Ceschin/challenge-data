@@ -19,7 +19,9 @@ module.exports = {
     },
 
     create(req, res) {
-        return res.render('students/create')
+        Student.teacherSelectOPtions(function (option) {
+            return res.render('students/create', {teacherSelectOPtions: option})
+        })
     },
     post(req, res) {
 
@@ -62,10 +64,10 @@ module.exports = {
                 return res.send('Student not found ');
             }
 
-            student.birth_date = date(student.birth_date).birthDay;
+            student.birth_date = date(student.birth_date).iso;
 
-            return res.render('students/edit', {
-                student
+            Student.teacherSelectOPtions(function (option) {
+                return res.render('students/edit', {student, teacherSelectOPtions: option})
             })
 
 
