@@ -53,9 +53,12 @@ module.exports = {
     },
 
     find(id, callback) {
-        db.query('SELECT * FROM students WHERE id = $1', [id], function (err, results) {
+        db.query(`SELECT students.*, teachers.name AS teacher_name
+        FROM students
+        LEFT JOIN teachers ON (students.teacher_id = teachers.id)
+        WHERE students.id = $1`, [id], function (err, results) {
             if (err) {
-                throw (`Database error: ${err}`)
+                throw (`Database error: ${err}`)    
             }
 
             callback(results.rows[0])

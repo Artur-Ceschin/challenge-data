@@ -2,7 +2,19 @@
 
 {% block content %}
     <div class="card index">
-        <a href="/teachers/create">Novo</a>
+        <div class="header">
+            <a class="button" href="/teachers/create">Novo</a>
+
+            <form action="/teachers" method="get">
+                <input type="text"
+                name="filter"
+                placeholder="Filtrar por nome ou matéria"
+                value='{{ filter }}'>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        
         <table>
             <thead>
                 <tr>
