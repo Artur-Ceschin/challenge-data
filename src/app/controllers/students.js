@@ -10,16 +10,41 @@ module.exports = {
 
     index(req, res) {
 
-        Student.all(function (students) {
+        let {
+            filter,
+            page,
+            limit
+        } = req.query
 
-            return res.render('students/index', {
-                students
-            })
-        })
+        page = page || 1
+        limit = limit || 3
+
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(students) {
+                const pagination = {
+                    total: Math.ceil(students[0].total / limit),
+                    page
+                }
+
+                return res.render('students/index', {
+                    students,
+                    pagination,
+                    filter
+                })
+            }
+        }
+
+        Student.paginate(params)
     },
 
     create(req, res) {
-        Student.teacherSelectOPtions(function (option) {
+        Student.studentSelectOPtions(function (option) {
             return res.render('students/create', {teacherSelectOPtions: option})
         })
     },

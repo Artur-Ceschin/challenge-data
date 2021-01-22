@@ -6,16 +6,13 @@
             <a class="button" href="/teachers/create">Novo</a>
 
             <form action="/teachers" method="get">
-                <input type="text"
-                name="filter"
-                placeholder="Filtrar por nome ou matéria"
-                value='{{ filter }}'>
+                <input type="text" name="filter" placeholder="Filtrar por nome ou matéria" value='{{ filter }}'>
 
                 <button type="submit">Filtrar</button>
             </form>
         </div>
-        
-        <table>
+
+    <table>
             <thead>
                 <tr>
                     <th>Nome completo</th>
@@ -47,5 +44,9 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="pagination" data-page="{{pagination.page}}" data-total="{{pagination.total}}" data-filter="{{filter}}"></div>
+
 </div>
+
 {% endblock content %}

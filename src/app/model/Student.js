@@ -53,9 +53,9 @@ module.exports = {
     },
 
     find(id, callback) {
-        db.query(`SELECT students.*, teachers.name AS teacher_name
+        db.query(`SELECT students.*, student.name AS teacher_name
         FROM students
-        LEFT JOIN teachers ON (students.teacher_id = teachers.id)
+        LEFT JOIN student ON (students.teacher_id = student.id)
         WHERE students.id = $1`, [id], function (err, results) {
             if (err) {
                 throw (`Database error: ${err}`)    
@@ -107,12 +107,46 @@ module.exports = {
         })
     },
     teacherSelectOPtions(callback) {
-        db.query(`SELECT name, id FROM teachers`, function (err, result) {
+        db.query(`SELECT name, id FROM student`, function (err, result) {
             if (err) {
                 throw (`Database Error  ${err}`)
             }
 
             callback(result.rows)
+        })
+    },
+    paginate(params) {
+        const { filter, limit, offset, callback } = params
+        
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT COUNT(*) FROM students
+            ) AS total`
+
+        if ( filter ) {
+            
+            filterQuery = `
+                WHERE students.name ILIKE '%${filter}%'
+                OR students.email ILIKE '%${filter}%'
+            `
+            totalQuery = `(
+                SELECT COUNT(*) FROM students
+                ${filterQuery}
+            ) AS total`
+        }
+
+        query = `
+            SELECT students.*, ${totalQuery}
+            FROM students
+            ${filterQuery}
+            LIMIT $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], function(err, results) {
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
         })
     }
 }
